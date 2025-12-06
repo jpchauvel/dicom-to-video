@@ -31,13 +31,16 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 
+[dependency-groups]
+dev = [
+    "black>=25.11.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/jpchauvel/dicom-to-video"
 Documentation = "https://github.com/jpchauvel/dicom-to-video/blob/main/README.md"
 Repository = "https://github.com/jpchauvel/dicom-to-video"
 Issues = "https://github.com/jpchauvel/dicom-to-video/issues"
 
-[dependency-groups]
-dev = [
-    "black>=25.11.0",
-]
+[project.scripts]
+dicom-to-video = "main:main"
