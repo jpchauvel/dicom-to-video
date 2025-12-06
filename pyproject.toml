@@ -15,6 +15,27 @@ dependencies = [
     "opencv-python>=4.12.0.88",
     "pydicom>=3.0.1",
 ]
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 4 - Beta",
+
+  # Indicate who your project is intended for
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Build Tools",
+
+  # Specify the Python versions you support here.
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.14",
+]
+
+[project.urls]
+Homepage = "https://github.com/jpchauvel/dicom-to-video"
+Documentation = "https://github.com/jpchauvel/dicom-to-video/blob/main/README.md"
+Repository = "https://github.com/jpchauvel/dicom-to-video"
+Issues = "https://github.com/jpchauvel/dicom-to-video/issues"
 
 [dependency-groups]
 dev = [
