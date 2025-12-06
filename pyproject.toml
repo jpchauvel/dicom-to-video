@@ -43,4 +43,11 @@ Repository = "https://github.com/jpchauvel/dicom-to-video"
 Issues = "https://github.com/jpchauvel/dicom-to-video/issues"
 
 [project.scripts]
-dicom-to-video = "main:main"
+dicom-to-video = "dicom_to_video.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/dicom_to_video/__about__.py"
