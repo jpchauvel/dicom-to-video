@@ -1,35 +1,28 @@
-[tool.black]
-line-length = 79
-
 [project]
 name = "dicom-to-video"
+version = "0.1.1"
+description = "DICOM sequential medical images to AVI video"
+readme = "README.md"
 authors = [
     {name = "Jean-Pierre Chauvel", email = "jean.p.chauvel@gmail.com"},
 ]
-license = {text = "CC0"}
-version = "0.1.0"
-description = "DICOM sequential medical images to AVI video"
 requires-python = "<3.15,>=3.14"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Build Tools",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.14",
+]
+module = "dicom_to_video"
 dependencies = [
     "matplotlib>=3.10.7",
     "opencv-python>=4.12.0.88",
     "pydicom>=3.0.1",
 ]
-classifiers = [
-  # How mature is this project? Common values are
-  #   3 - Alpha
-  #   4 - Beta
-  #   5 - Production/Stable
-  "Development Status :: 4 - Beta",
 
-  # Indicate who your project is intended for
-  "Intended Audience :: Developers",
-  "Topic :: Software Development :: Build Tools",
-
-  # Specify the Python versions you support here.
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.14",
-]
+[project.license]
+file = "LICENSE"
 
 [dependency-groups]
 dev = [
@@ -51,3 +44,6 @@ build-backend = "hatchling.build"
 
 [tool.hatch.version]
 path = "src/dicom_to_video/__about__.py"
+
+[tool.black]
+line-length = 79
