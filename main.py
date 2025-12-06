@@ -22,9 +22,9 @@ def get_maximum_dimensions(images: list[pathlib.Path]) -> tuple[int, int]:
 
 def main(args: argparse.Namespace) -> None:
     # The path to the example "ct" dataset included with pydicom
-    input_path: pathlib.Path = pathlib.Path(args.input_path)
-    output_path: pathlib.Path = pathlib.Path(args.output_path)
-    output_file: pathlib.Path = pathlib.Path(args.output_file)
+    input_path: pathlib.Path = pathlib.Path(args.input_path).expanduser()
+    output_path: pathlib.Path = pathlib.Path(args.output_path).expanduser()
+    output_file: pathlib.Path = pathlib.Path(args.output_file).expanduser()
 
     # Ensure output file has .avi extension
     if not output_file.suffix:
@@ -33,15 +33,24 @@ def main(args: argparse.Namespace) -> None:
     output_path.mkdir(parents=True, exist_ok=True)
 
     if input_path.is_dir():
-        for f in input_path.iterdir():
+        # Sort DICOM files by Instance Number to preserve order
+        dicom_files = sorted(input_path.iterdir(), key=lambda f: f.name)
+        dicom_data = []
+
+        for f in dicom_files:
             ds = dcmread(f)
+            dicom_data.append((f, ds))
+
+        # Save images in sorted order
+        for f, ds in dicom_data:
             # `arr` is a numpy.ndarray
             arr = ds.pixel_array
             plt.imsave(output_path / f"{f.name}.png", arr, cmap="gray")
 
-        images: list[pathlib.Path] = [
-            pathlib.Path(f) for f in output_path.iterdir()
-        ]
+        # Reconstruct the sorted image list in the same order
+        images: list[pathlib.Path] = (
+            [output_path / f"{f.name}.png" for f, _ in dicom_data]
+        )
 
         # Get maximum dimensions across all images
         width, height = get_maximum_dimensions(images)
