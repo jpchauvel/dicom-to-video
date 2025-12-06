@@ -7,6 +7,21 @@ import numpy as np
 from pydicom import dcmread
 
 
+def get_args() -> argparse.Namespace:
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
+        description="Convert DICOM medical sequential images to AVI"
+    )
+    parser.add_argument(
+        "--input_path", required=True, help="DICOM directory path"
+    )
+    parser.add_argument(
+        "--output_file",
+        required=True,
+        help="Output AVI file path (without the extension)",
+    )
+    return parser.parse_args()
+
+
 def get_maximum_dimensions(arrays: list[np.ndarray]) -> tuple[int, int]:
     """Get the maximum width and height across all image arrays."""
     max_width = max_height = 0
@@ -42,7 +57,9 @@ def grayscale_to_bgr(gray_array: np.ndarray) -> np.ndarray:
     return cv2.cvtColor(gray_array, cv2.COLOR_GRAY2BGR)
 
 
-def main(args: argparse.Namespace) -> None:
+def main() -> None:
+    args: argparse.Namespace = get_args()
+
     # The path to the example "ct" dataset included with pydicom
     input_path: pathlib.Path = pathlib.Path(args.input_path).expanduser()
     output_file: pathlib.Path = pathlib.Path(args.output_file).expanduser()
@@ -100,15 +117,4 @@ def main(args: argparse.Namespace) -> None:
 
 
 if __name__ == "__main__":
-    parser: argparse.ArgumentParser = argparse.ArgumentParser(
-        description="Convert DICOM medical sequential images to AVI"
-    )
-    parser.add_argument(
-        "--input_path", required=True, help="DICOM directory path"
-    )
-    parser.add_argument(
-        "--output_file",
-        required=True,
-        help="Output AVI file path (without the extension)",
-    )
-    main(parser.parse_args())
+    main()

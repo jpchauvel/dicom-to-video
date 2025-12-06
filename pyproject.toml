@@ -1,6 +1,6 @@
 [project]
 name = "dicom-to-video"
-version = "0.1.1"
+version = "0.1.2"
 description = "DICOM sequential medical images to AVI video"
 readme = "README.md"
 authors = [
