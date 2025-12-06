@@ -30,7 +30,9 @@ def grayscale_to_bgr(gray_array: np.ndarray) -> np.ndarray:
         # Scale to 0-255 range
         if arr_max > arr_min:
             gray_normalized = (
-                (gray_array.astype(np.float64) - arr_min) / (arr_max - arr_min) * 255
+                (gray_array.astype(np.float64) - arr_min)
+                / (arr_max - arr_min)
+                * 255
             ).astype(np.uint8)
         else:
             gray_normalized = np.zeros_like(gray_array, dtype=np.uint8)
@@ -72,7 +74,9 @@ def main(args: argparse.Namespace) -> None:
         # Create VideoWriter with proper parameters
         # Use MJPEG codec for .avi, 1 fps, color output
         fourcc = cv2.VideoWriter.fourcc(*"MJPG")
-        video = cv2.VideoWriter(output_file.as_posix(), fourcc, 1.0, (width, height))
+        video = cv2.VideoWriter(
+            output_file.as_posix(), fourcc, 1.0, (width, height)
+        )
 
         # Write each frame to video
         for frame in image_arrays:
@@ -99,7 +103,9 @@ if __name__ == "__main__":
     parser: argparse.ArgumentParser = argparse.ArgumentParser(
         description="Convert DICOM medical sequential images to AVI"
     )
-    parser.add_argument("--input_path", required=True, help="DICOM directory path")
+    parser.add_argument(
+        "--input_path", required=True, help="DICOM directory path"
+    )
     parser.add_argument(
         "--output_file",
         required=True,
